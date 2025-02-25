@@ -1,0 +1,16 @@
+﻿@page "/"
+@using Chapter8DecoratorLogging.Models
+@rendermode InteractiveServer
+@inject IService LoggedService
+
+<h1>Decorator pattern for logging</h1>
+<button @onclick="PerformLoggedOperation">Perform Operation</button>
+<p>@message</p>
+
+@code {
+    private string message = string.Empty;
+    private void PerformLoggedOperation()
+    {
+        message = LoggedService.PerformOperation();
+    }
+}

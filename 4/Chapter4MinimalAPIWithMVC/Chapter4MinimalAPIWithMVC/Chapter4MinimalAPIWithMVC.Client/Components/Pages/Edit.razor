@@ -1,0 +1,37 @@
+﻿@page "/edit/{Id:int}"
+@rendermode InteractiveServer
+@using System.ComponentModel.DataAnnotations
+@using Chapter4MinimalAPIWithMVC.Client.Services
+@using Chapter4MinimalAPIWithMVC.Shared.Models
+@using System.Text.Json
+@using System.Text
+@using System.Net.Mime
+@inject NavigationManager NavManager
+@inject HttpClient httpClient
+@inject ITaskListService service
+<h3>Edit</h3>
+<div>
+    <div>
+        <label>Description:</label>
+        <input type="text" @bind="@taskEntity.Description" />
+    </div>
+    <div>
+        <input type="checkbox" @bind="@taskEntity.IsCompleted" />
+        <label>Completed</label>
+    </div>
+    <button @onclick="SubmitForm">Save</button>
+</div>
+@code {
+    [Parameter] public int Id { get; set; }
+    private TaskEntity? taskEntity = new TaskEntity();
+    protected override async Task OnInitializedAsync() 
+        => taskEntity = await service.ReadById(httpClient, Id);
+    private async Task SubmitForm()
+    {
+        if (taskEntity!.Description.Trim().Length > 0)
+        {
+            var response = await service.Update(httpClient, taskEntity);
+            if (response) NavManager.NavigateTo("/");
+        }
+    }
+}

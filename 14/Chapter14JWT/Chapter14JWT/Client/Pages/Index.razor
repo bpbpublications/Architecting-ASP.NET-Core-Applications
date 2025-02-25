@@ -1,0 +1,50 @@
+﻿@page "/"
+@using Chapter14JWT.Client.Models
+@using Chapter14JWT.Client.Services
+@using Chapter14JWT.Shared.Models
+@inject IAuthenticationService service
+
+<button @onclick="ShowLoginDialog">Show Login Dialog</button>
+<p>
+    <strong>Username</strong>: @username
+</p>
+<p>
+    <strong>Password</strong>: @pwd
+</p>
+<p>
+    <strong>JWT Token</strong>: @jwt
+</p>
+
+<LoginDialog IsVisible="@isLoginDialogVisible" OnClose="HandleLoginDialogClose" OnLogin="OnLoginCallback" />
+
+
+
+
+@code {
+    string username = string.Empty;
+    string pwd = string.Empty;
+    string jwt = string.Empty;
+
+    private bool isLoginDialogVisible = false;
+
+    private void ShowLoginDialog()
+    {
+        isLoginDialogVisible = true;
+    }
+
+    private void HandleLoginDialogClose(bool isVisible)
+    {
+        isLoginDialogVisible = isVisible;
+    }
+
+    private async Task OnLoginCallback((string a, string b) par)
+    {
+        username = par.a;
+        pwd = par.b;
+
+        var usr = new UserForAuthenticationDto() { Username=par.a, Password=par.b };
+
+        var authUser=await service.Login(usr);
+        jwt = authUser.Token;
+    }
+}

@@ -1,0 +1,9 @@
+﻿@using Chapter8ObserverCascading.Models
+<div class="@theme?.MainTheme">
+    <h3>Date-Time</h3>
+    <p>@theme?.MainTheme</p>
+    <h1>@DateTime.Now.ToShortDateString()</h1>
+</div>
+@code {
+    [CascadingParameter] private ThemeInfo? theme { get; set; }
+}

@@ -1,0 +1,47 @@
+﻿@using Microsoft.AspNetCore.Components
+@inject IJSRuntime JS
+
+<div class="dialog" style="display:@(IsVisible ? "block" : "none")">
+    <div class="dialog-title">
+        <h6>
+            <span class="material-icons mr-3 mb-n1">login</span>
+            Dominat login
+        </h6>
+    </div>
+    <div class="dialog-content">
+        <div class="form-group">
+            <label for="username">USERNAME</label>
+            <input type="text" id="username" @bind="Username" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="password">PASSWORD</label>
+            <input type="password" id="password" @bind="Password" class="form-control" />
+        </div>
+    </div>
+    <div class="dialog-actions">
+        <button type="button" @onclick="ConfirmLogin" class="btn btn-danger">LOGIN</button>
+        <button type="button" @onclick="Cancel" class="btn btn-secondary">CANCEL</button>
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool IsVisible { get; set; }
+    [Parameter] public EventCallback<bool> OnClose { get; set; }
+    [Parameter] public EventCallback<(string, string)> OnLogin { get; set; }
+
+    private string Username { get; set; } = string.Empty;
+    private string Password { get; set; } = string.Empty;
+
+    private void Cancel()
+    {
+        IsVisible = false;
+        OnClose.InvokeAsync(IsVisible);
+    }
+
+    private void ConfirmLogin()
+    {
+        IsVisible = false;
+        OnClose.InvokeAsync(IsVisible);
+        OnLogin.InvokeAsync((Username, Password));
+    }
+}

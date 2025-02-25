@@ -1,0 +1,37 @@
+﻿@page "/"
+@using Chapter9CQRS_API.Models
+@using Chapter9CqrsUI.HttpServices
+@inject IProductService ProductService
+@inject NavigationManager NavManager
+@rendermode InteractiveServer
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, products!</h1>
+<p><button @onclick="AddNewProduct">Add new product</button></p>
+@if (products is not null)
+{
+    foreach (var product in products)
+    {
+        <div style="border: 
+                1px solid black; padding: 10px; 
+                margin: 10px; width:300px">
+            <p>@product.Id</p>
+            <p>@product.Name</p>
+            <p>@product.Price</p>
+            <p><button @onclick="()=>EditProduct(product)">
+                Edit
+               </button>
+            </p>
+        </div>
+    }
+}
+@code {
+    private List<Product>? products;
+    protected override async Task OnInitializedAsync() 
+        => products = await ProductService.GetProductList();
+    private void EditProduct(Product product) 
+        => NavManager.NavigateTo($"edit-product/{product.Id}");
+    private void AddNewProduct() 
+        => NavManager.NavigateTo($"add-product");
+}

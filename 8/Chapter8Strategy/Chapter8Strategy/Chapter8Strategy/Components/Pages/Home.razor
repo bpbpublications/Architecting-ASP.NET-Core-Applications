@@ -1,0 +1,43 @@
+﻿@page "/"
+@using Chapter8Strategy.Models
+@inject IServiceProvider ServiceProvider
+@inject IEnumerable<IPaymentStrategy> PaymentStrategies
+@rendermode InteractiveServer
+<PageTitle>Home</PageTitle>
+<h1>Chapter 8 - Strategy pattern</h1>
+<h3>Choose Payment Method</h3>
+<select @onchange="ChangePaymentStrategy">
+    <option value="CreditCard">Credit Card</option>
+    <option value="PayPal">PayPal</option>
+</select>
+
+<button @onclick="() => ProcessPayment(100M)">Pay $100</button>
+
+@if (!string.IsNullOrEmpty(Payment))
+{
+    <h3>The selected payment is <span>@Payment</span></h3>
+}
+@code {
+    private PaymentContext paymentContext;
+    private string Payment = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        // Set a default strategy
+        paymentContext = new PaymentContext(PaymentStrategies.FirstOrDefault(p => p is CreditCardPayment));
+    }
+
+    private void ChangePaymentStrategy(ChangeEventArgs e)
+    {
+        if (e.Value.ToString() is "CreditCard")
+            paymentContext.SetPaymentStrategy(PaymentStrategies.FirstOrDefault(p => p is CreditCardPayment));
+        else
+            paymentContext.SetPaymentStrategy(PaymentStrategies.FirstOrDefault(p => p is PaypalPayment));
+    }
+
+    private async Task ProcessPayment(decimal amount)
+    {
+        await paymentContext.ExecutePayment(amount);
+        Payment = paymentContext.GetPaymentProcess();
+    }
+}

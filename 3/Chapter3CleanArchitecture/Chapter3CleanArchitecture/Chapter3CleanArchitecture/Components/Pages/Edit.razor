@@ -1,0 +1,52 @@
+﻿@page "/edit/{Id:int}"
+
+@rendermode InteractiveServer
+@using Core.Interfaces
+@using System.ComponentModel.DataAnnotations
+@using Core.Entities
+
+@inject ITaskEntities Repository
+@inject NavigationManager NavManager
+
+<h3>Edit</h3>
+
+
+<div>
+    <div>
+        <label>Description:</label>
+        <input type="text" @bind="@taskEntity.Description" />
+    </div>
+    <div>
+        <input type="checkbox" @bind="@taskEntity.IsCompleted" />
+        <label>Completed</label>
+    </div>
+    <button @onclick="SubmitForm">Save</button>
+</div>
+
+
+
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private TaskEntity taskEntity = new TaskEntity();
+
+    protected override Task OnInitializedAsync()
+    {
+        taskEntity = Repository.GetEntityFromId(Id) ?? new();
+        return base.OnInitializedAsync();
+    }
+
+    private void SubmitForm()
+    {
+        var existingEntity = Repository.GetEntityFromId(taskEntity.Id);
+        if (existingEntity is not null)
+        {
+            // var index = Repository.Entities.IndexOf(existingEntity);
+            // Repository.Entities[index] = taskEntity;
+            NavManager.NavigateTo("/");
+        }
+    }
+    
+}

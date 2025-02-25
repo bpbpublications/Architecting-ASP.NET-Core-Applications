@@ -1,0 +1,61 @@
+﻿@page "/"
+@using Chapter8EFIntro.Models
+@using Microsoft.EntityFrameworkCore
+@inject DataContext dbContext
+@rendermode RenderMode.InteractiveServer
+
+<PageTitle>Home</PageTitle>
+<h1>My Books page</h1>
+<style>
+    .form-input {
+        width: 100%; /* Rendi tutti gli input larghi uguali e adattabili alla larghezza del form */
+    }
+
+    form {
+        max-width: 300px; /* Limita la larghezza del form a 300px */
+        margin: auto; /* Centra il form nella pagina */
+        border: 2px solid #ccc; /* Aggiungi un bordo solido con colore grigio chiaro */
+        padding: 20px; /* Aggiungi un padding intorno agli elementi interni del form */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Opzionale: aggiungi una leggera ombra per un effetto di profondità */
+    }
+</style>
+
+<form @onsubmit="AddBook">
+    <label>Title</label>
+    <input class="form-input" type="text" @bind-value="@newTitle" />
+    <br />
+    <label>Author</label>
+    <input class="form-input" type="text" @bind-value="@newAuthor" />
+    <br />
+    <input class="form-input" type="submit" value="Submit" />
+</form>
+
+<h3>Archived book list</h3>
+@if (books == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+    @foreach (var book in books)
+    {
+        <li>@book.Title by @book.Author</li>
+    }
+    </ul>
+}
+
+@code {
+    private string newTitle = string.Empty;
+    private string newAuthor = string.Empty;
+    private List<Book> books = new();
+    protected override async Task OnInitializedAsync()
+        => books = await dbContext.Books.ToListAsync();
+    private async Task AddBook()
+    {
+        var book = new Book { Title = newTitle, Author = newAuthor };
+        dbContext.Books.Add(book);
+        await dbContext.SaveChangesAsync();
+        books.Add(book);
+    }
+}

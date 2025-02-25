@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34916.146
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter11TextSignalR", "Chapter11TextSignalR\Chapter11TextSignalR\Chapter11TextSignalR.csproj", "{52D24378-FA4E-4AB7-B697-E3B18B25D371}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter11TextSignalR.Client", "Chapter11TextSignalR\Chapter11TextSignalR.Client\Chapter11TextSignalR.Client.csproj", "{642EA85F-7ECE-4A1C-AFB3-473624006704}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter11TextSignalR.Shared", "Chapter11TextSignalR.Shared\Chapter11TextSignalR.Shared.csproj", "{319538A3-685A-40D5-8D08-EA997C0A1114}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52D24378-FA4E-4AB7-B697-E3B18B25D371}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D24378-FA4E-4AB7-B697-E3B18B25D371}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D24378-FA4E-4AB7-B697-E3B18B25D371}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D24378-FA4E-4AB7-B697-E3B18B25D371}.Release|Any CPU.Build.0 = Release|Any CPU
+		{642EA85F-7ECE-4A1C-AFB3-473624006704}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{642EA85F-7ECE-4A1C-AFB3-473624006704}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{642EA85F-7ECE-4A1C-AFB3-473624006704}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{642EA85F-7ECE-4A1C-AFB3-473624006704}.Release|Any CPU.Build.0 = Release|Any CPU
+		{319538A3-685A-40D5-8D08-EA997C0A1114}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{319538A3-685A-40D5-8D08-EA997C0A1114}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{319538A3-685A-40D5-8D08-EA997C0A1114}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{319538A3-685A-40D5-8D08-EA997C0A1114}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8CF42808-EA33-4235-B805-736D8C07B6A0}
+	EndGlobalSection
+EndGlobal

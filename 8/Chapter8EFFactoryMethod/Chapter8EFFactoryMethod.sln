@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter8EFFactoryMethod", "Chapter8EFFactoryMethod\Chapter8EFFactoryMethod\Chapter8EFFactoryMethod.csproj", "{CC2AC573-85A8-4C06-BD3E-E232B1BD9768}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter8EFFactoryMethod.Client", "Chapter8EFFactoryMethod\Chapter8EFFactoryMethod.Client\Chapter8EFFactoryMethod.Client.csproj", "{B314D391-FDC8-493E-9F9D-E9F951755845}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CC2AC573-85A8-4C06-BD3E-E232B1BD9768}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC2AC573-85A8-4C06-BD3E-E232B1BD9768}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC2AC573-85A8-4C06-BD3E-E232B1BD9768}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC2AC573-85A8-4C06-BD3E-E232B1BD9768}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B314D391-FDC8-493E-9F9D-E9F951755845}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B314D391-FDC8-493E-9F9D-E9F951755845}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B314D391-FDC8-493E-9F9D-E9F951755845}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B314D391-FDC8-493E-9F9D-E9F951755845}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9BD640DA-0DFC-4276-A1A5-48C586722568}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,6 @@
+@Chapter12xUnit_HostAddress = http://localhost:5207
+
+GET {{Chapter12xUnit_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

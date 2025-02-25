@@ -1,0 +1,8 @@
+﻿@using Chapter8ObserverCascading.Models
+@inherits LayoutComponentBase
+<CascadingValue Value="@theme">
+    @Body
+</CascadingValue>
+@code {
+    [CascadingParameter] private ThemeInfo? theme { get; set; }
+}

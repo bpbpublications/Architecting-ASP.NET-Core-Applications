@@ -1,0 +1,43 @@
+﻿@page "/edit/{Id:int}"
+@rendermode InteractiveServer
+@using System.ComponentModel.DataAnnotations
+@using Application.Interfaces
+@using Core.Models
+@inject ITaskManagementPort Port
+@inject NavigationManager NavManager
+<h3>Edit</h3>
+<div>
+    <div>
+        <label>Description:</label>
+        <input type="text" @bind="@taskEntityModified.Name" />
+    </div>
+    <div>
+        <input type="checkbox" @bind="@taskEntityModified.IsCompleted" />
+        <label>Completed</label>
+    </div>
+    <button @onclick="SubmitForm">Save</button>
+</div>
+@code {
+    [Parameter] public int Id { get; set; }
+    private TaskModel taskEntityModified = new TaskModel();
+    protected override Task OnInitializedAsync()
+    {
+        TaskModel taskEntityOriginal = Port.GetAllTasks().FirstOrDefault(e => e.Id == Id);
+        if (taskEntityOriginal is not null)
+        {
+            taskEntityModified.Name = taskEntityOriginal.Name;
+            taskEntityModified.IsCompleted = taskEntityOriginal.IsCompleted;
+            taskEntityModified.Id = taskEntityOriginal.Id;
+        }
+        return base.OnInitializedAsync();
+    }
+    private void SubmitForm()
+    {
+        var existingEntity = Port.GetAllTasks().FirstOrDefault(e => e.Id == Id);
+        if (existingEntity is not null)
+        {
+            Port.UpdateTask(taskEntityModified);
+            NavManager.NavigateTo("/");
+        }
+    }
+}

@@ -1,0 +1,36 @@
+﻿@page "/add-product"
+@using Chapter9CQRS_API.Models
+@using Chapter9CqrsUI.HttpServices
+@inject IProductService productService
+@inject NavigationManager NavManager
+@rendermode InteractiveServer
+
+<h1>Add New Product</h1>
+
+<EditForm Model="@product" 
+        OnValidSubmit="HandleValidSubmit" 
+        FormName="AddProductForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <InputText id="name" class="form-control" @bind-Value="product.Name" />
+    </div>
+    <div class="form-group">
+        <label for="price">Price:</label>
+        <InputNumber id="price" class="form-control" @bind-Value="product.Price" />
+    </div>
+    <button type="submit" class="btn btn-primary">Add Product</button>
+</EditForm>
+@code {
+    private Product product = new Product();
+    private async Task HandleValidSubmit()
+    {
+        await productService.Post(product);
+        // Reset form after submission
+        product = new Product(); 
+        NavManager.NavigateTo("/");
+    }
+}
+
+

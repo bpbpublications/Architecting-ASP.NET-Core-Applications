@@ -1,0 +1,58 @@
+﻿@page "/"
+@rendermode InteractiveServer
+
+@using Core.Interfaces
+@inject ITaskEntities Repository
+@inject NavigationManager NavManager
+
+<PageTitle>Home</PageTitle>
+
+<h1>My task list</h1>
+
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Is Completed</th>
+        <th>Actions</th>
+    </tr>
+    @if (Repository is not null)
+    {
+        @foreach (var task in Repository.GetEntities())
+        {
+            <tr>
+                <td>@task.Id</td>
+                <td>@task.Description</td>
+                <td>@(task.IsCompleted ? "Yes" : "No")</td>
+                <td>
+                    <a href="" @onclick="(()=>Edit(task.Id))">Edit</a>
+                    |
+                    <a href="" @onclick="(()=>Delete(task.Id))">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<a href="" @onclick="CreateNew">Add new task</a>
+
+
+@code
+{
+    private void Edit(int id)
+    {
+        NavManager.NavigateTo($"edit/{id}");
+    }
+
+    private void CreateNew()
+    {
+        NavManager.NavigateTo($"add-new");
+    }
+
+    private void Delete(int id)
+    {
+        var taskElement = Repository.GetEntityFromId(id);
+        if(taskElement is not null)
+            Repository.RemoveEntity(taskElement);
+    }
+}
+

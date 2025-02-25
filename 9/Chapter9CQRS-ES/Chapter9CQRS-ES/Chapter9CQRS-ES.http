@@ -1,0 +1,6 @@
+@Chapter9CQRS_ES_HostAddress = http://localhost:5169
+
+GET {{Chapter9CQRS_ES_HostAddress}}/GetProduct/10
+Accept: application/json
+
+###

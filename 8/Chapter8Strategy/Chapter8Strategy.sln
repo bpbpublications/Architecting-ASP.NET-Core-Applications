@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter8Strategy", "Chapter8Strategy\Chapter8Strategy\Chapter8Strategy.csproj", "{3D91A519-CE07-4C83-BBAD-AD72E13EB583}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chapter8Strategy.Client", "Chapter8Strategy\Chapter8Strategy.Client\Chapter8Strategy.Client.csproj", "{E778085A-0704-4563-AF57-E3A612B3C14F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3D91A519-CE07-4C83-BBAD-AD72E13EB583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D91A519-CE07-4C83-BBAD-AD72E13EB583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D91A519-CE07-4C83-BBAD-AD72E13EB583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D91A519-CE07-4C83-BBAD-AD72E13EB583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E778085A-0704-4563-AF57-E3A612B3C14F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E778085A-0704-4563-AF57-E3A612B3C14F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E778085A-0704-4563-AF57-E3A612B3C14F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E778085A-0704-4563-AF57-E3A612B3C14F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9FCE06E6-F908-4427-8DB6-BF1A96CB6670}
+	EndGlobalSection
+EndGlobal

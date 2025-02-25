@@ -1,0 +1,62 @@
+﻿@page "/"
+@using Chapter8EFFactoryMethod.Models
+@using Microsoft.EntityFrameworkCore
+@inject DataRepository dbContext
+@rendermode RenderMode.InteractiveServer
+<PageTitle>Home</PageTitle>
+<h1>My Books page</h1>
+<style>
+    .form-input {
+        width: 100%; 
+    }
+
+    form {
+        max-width: 300px; 
+        margin: auto; 
+        border: 2px solid #ccc; 
+        padding: 20px; 
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    }
+</style>
+<h2>Add new book</h2>
+<form @onsubmit="AddBook">
+    <label>Title</label>
+    <input class="form-input" type="text" @bind-value="@newTitle" />
+    <br />
+    <label>Author</label>
+    <input class="form-input" type="text" @bind-value="@newAuthor" />
+    <br />
+    <input class="form-input" type="submit" value="Submit" />
+</form>
+
+<h3>Archived book list</h3>
+@if (books == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <ul>
+    @foreach (var book in books)
+    {
+        <li>@book.Title by @book.Author</li>
+    }
+    </ul>
+}
+
+@code {
+    private string newTitle = string.Empty;
+    private string newAuthor = string.Empty;
+    private List<Book> books = new();
+    protected override async Task OnInitializedAsync()
+    { 
+        books = await dbContext.GetAllEntitiesAsync();
+    }
+
+    private async Task AddBook()
+    {
+        await dbContext.AddEntityAsync
+           (new Book { Title = newTitle, Author = newAuthor });
+        books = await dbContext.GetAllEntitiesAsync();
+    }
+}

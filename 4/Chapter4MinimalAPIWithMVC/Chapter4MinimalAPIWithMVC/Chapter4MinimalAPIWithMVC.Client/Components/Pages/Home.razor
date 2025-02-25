@@ -1,0 +1,57 @@
+﻿@page "/"
+@using Chapter4MinimalAPIWithMVC.Client.Services
+@using Chapter4MinimalAPIWithMVC.Shared.Models
+@using System.Text.Json
+@rendermode InteractiveServer
+
+@inject NavigationManager NavManager
+@inject HttpClient httpClient
+@inject ITaskListService service
+
+<PageTitle>Home</PageTitle>
+
+<h1>My task list</h1>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Is Completed</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var task in entities)
+    {
+        <tr>
+            <td>@task.Id</td>
+            <td>@task.Description</td>
+            <td>@(task.IsCompleted ? "Yes" : "No")</td>
+            <td>
+                <a href="" @onclick="(()=>Edit(task.Id))">Edit</a>
+                |
+                <a href="" @onclick="(()=>Delete(task.Id))">Delete</a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="" @onclick="CreateNew">Add new task</a>
+
+@code
+{
+    private List<TaskEntity> entities = new();
+    private void Edit(int id) 
+        => NavManager.NavigateTo($"edit/{id}");
+    private void CreateNew() 
+        => NavManager.NavigateTo($"create");
+    private async Task Delete(int id)
+    {
+        var taskElement = entities.FirstOrDefault(e => e.Id == id);
+        if (taskElement is not null)
+        {
+            await service.Delete(httpClient, id);
+            await GetAllTasksAsync();
+        }
+    }
+    protected override async Task  OnInitializedAsync()
+        => await GetAllTasksAsync();
+    private async Task GetAllTasksAsync() 
+        => entities = await service.ReadAll(httpClient) ?? new();
+}

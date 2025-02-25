@@ -1,0 +1,38 @@
+﻿@page "/"
+@rendermode InteractiveServer
+@using Application.Interfaces
+@inject ITaskManagementPort port
+@inject NavigationManager NavManager
+<PageTitle>Home</PageTitle>
+<h1>My task list</h1>
+<table class="table">
+    <tr>
+        <th>Id</th>
+        <th>Description</th>
+        <th>Is Completed</th>
+        <th>Actions</th>
+    </tr>
+    @if (port is not null)
+    {
+        @foreach (var task in port.GetAllTasks())
+        {
+            <tr>
+                <td>@task.Id</td>
+                <td>@task.Name</td>
+                <td>@(task.IsCompleted ? "Yes" : "No")</td>
+                <td>
+                    <a href="" @onclick="(()=>Edit(task.Id))">Edit</a>
+                    |
+                    <a href="" @onclick="(()=>Delete(task.Id))">Delete</a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<a href="" @onclick="CreateNew">Add new task</a>
+@code
+{
+    private void Edit(int id) => NavManager.NavigateTo($"edit/{id}");
+    private void CreateNew() => NavManager.NavigateTo($"add-new");
+    private void Delete(int id) => port.DeleteTask(id);
+}
